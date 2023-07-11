@@ -5,12 +5,14 @@ import { getStudentById } from '../../services/students/students';
 import { CircularProgressOverlay } from '../circular-progress-overlay/circular-progress-overlay';
 import { getStudentInterviews } from '../../services/interviews/interviews';
 import { LayoutError } from '../layout/layout-error/layout-error';
+import { getCommunicationsByStudentId } from '../../services/communications/communications';
 
 export function StudentInfo() {
   const [student, setStudent] = useState({});
   const [goals, setGoals] = useState({});
   const [careers, setCareers] = useState({});
   const [interviews, setInterviews] = useState({});
+  const [communications, setCommunications] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -37,6 +39,10 @@ export function StudentInfo() {
       const interviewResponse = await getStudentInterviews(id);
       const { interviewData } = interviewResponse;
       setInterviews(interviewData);
+
+      const communicationResponse = await getCommunicationsByStudentId(id);
+      const { communicationData } = communicationResponse;
+      setCommunications(communicationData);
     } catch (error) {
       setHasError(true);
     }
@@ -55,6 +61,7 @@ export function StudentInfo() {
         goals={goals}
         careers={careers}
         interviews={interviews}
+        communications={communications}
         onReload={() => requestStudent(studentId)}
       />
     ),

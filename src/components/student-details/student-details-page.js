@@ -11,9 +11,11 @@ import { CommunicationLog } from './communication-log';
 import { StudentInfoBox } from './student-info-box';
 import DynamicTabs from '../table-layout/dynamicTabs';
 import AddGoalModal from './addGoalMoal';
+import AddCommunicationsModal from './addCommunicationModal';
 
 export default function StudentDetails(props) {
-  const { student, goals, careers, interviews, onReload } = props;
+  const { student, goals, careers, interviews, communications, onReload } =
+    props;
   const [tabValue, setTabValue] = React.useState(0);
 
   const handleChange = React.useCallback((event, newValue) => {
@@ -179,28 +181,11 @@ export default function StudentDetails(props) {
       </Grid>
       <Grid container xs={1}>
         <Grid item alignItems="flex-end" sx={{ pl: '510%' }}>
-          <GenericModal
-            modalHeadingTitle="Add Communication"
-            actionButtonTitle="Add"
-            cancelButtonTitle="Cancel"
-            openButtonIcon={<AddIcon sx={iconStyle} />}
-          >
-            {/* TODO: Make Coach and Topic Dropdowns, Make Notes a large Textfield */}
-            <Grid container direction="column">
-              <Grid item sx={{ py: 3 }}>
-                <TextFieldWithErrorMessage label="Coach" />
-              </Grid>
-              <Grid item sx={{ py: 3 }}>
-                <TextFieldWithErrorMessage label="Topic" />
-              </Grid>
-              <Grid item sx={{ py: 3 }}>
-                <TextFieldWithErrorMessage label="Notes" />
-              </Grid>
-            </Grid>
-          </GenericModal>
+          <AddCommunicationsModal />
         </Grid>
 
         <Grid item sx={{ ml: '10%' }}>
+          {console.log(communications)}
           <CommunicationLog
             data={[
               [0, '01/24/2023', 'John', 'Intro', 'We Had Fun'],
@@ -287,6 +272,7 @@ StudentDetails.propTypes = {
   goals: propTypes.object,
   careers: propTypes.object,
   interviews: propTypes.object,
+  communications: propTypes.object,
   onReload: propTypes.func,
 };
 StudentDetails.defaultProps = {
@@ -294,5 +280,6 @@ StudentDetails.defaultProps = {
   goals: undefined,
   careers: undefined,
   interviews: undefined,
+  communications: undefined,
   onReload: undefined,
 };
