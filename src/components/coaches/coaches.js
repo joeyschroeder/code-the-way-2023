@@ -149,6 +149,7 @@ export function Coaches() {
                   'coachPhoneNumber',
                 ]}
                 customTableMaxHeight={520}
+                firstOrderBy="coachLastName"
               >
                 <AddCoachModal />
               </DynamicTableWithRequest>

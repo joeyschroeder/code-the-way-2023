@@ -40,10 +40,16 @@ function stableSort(array, comparator) {
 }
 
 export function DynamicTable(props) {
-  const { APIcolumns, APIrows, filterBy, customTableMaxHeight, refreshTable } =
-    props;
+  const {
+    APIcolumns,
+    APIrows,
+    filterBy,
+    customTableMaxHeight,
+    refreshTable,
+    firstOrderBy,
+  } = props;
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('');
+  const [orderBy, setOrderBy] = React.useState(firstOrderBy);
   const [rows, setRows] = useState(APIrows);
 
   const handleRequestSort = (event, property) => {
@@ -149,6 +155,7 @@ DynamicTable.propTypes = {
   APIrows: PropTypes.arrayOf(PropTypes.object),
   children: PropTypes.node.isRequired,
   filterBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  firstOrderBy: PropTypes.string,
   customTableMaxHeight: PropTypes.number,
   refreshTable: PropTypes.func,
 };
@@ -156,6 +163,7 @@ DynamicTable.propTypes = {
 DynamicTable.defaultProps = {
   APIcolumns: [],
   APIrows: [],
+  firstOrderBy: '',
   customTableMaxHeight: null,
   refreshTable: undefined,
 };

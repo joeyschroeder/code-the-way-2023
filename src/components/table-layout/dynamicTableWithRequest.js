@@ -5,8 +5,14 @@ import { LayoutPreloader } from '../layout/layout-preloader/layout-preloader';
 import { LayoutError } from '../layout/layout-error/layout-error';
 
 export function DynamicTableWithRequest(props) {
-  const { columns, filterBy, requestFunc, customTableMaxHeight, requestData } =
-    props;
+  const {
+    columns,
+    filterBy,
+    requestFunc,
+    customTableMaxHeight,
+    requestData,
+    firstOrderBy,
+  } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -42,6 +48,7 @@ export function DynamicTableWithRequest(props) {
       filterBy={filterBy}
       customTableMaxHeight={customTableMaxHeight}
       refreshTable={request}
+      firstOrderBy={firstOrderBy}
     >
       {props.children}
     </DynamicTable>
@@ -53,6 +60,7 @@ DynamicTableWithRequest.propTypes = {
   requestFunc: PropTypes.func,
   filterBy: PropTypes.arrayOf(PropTypes.string),
   children: PropTypes.node.isRequired,
+  firstOrderBy: PropTypes.string,
   customTableMaxHeight: PropTypes.number,
   requestData: PropTypes.string,
 };
@@ -61,6 +69,7 @@ DynamicTableWithRequest.defaultProps = {
   columns: [],
   requestFunc: () => {},
   filterBy: [],
+  firstOrderBy: '',
   customTableMaxHeight: null,
   requestData: null,
 };
