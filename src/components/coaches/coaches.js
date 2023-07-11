@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid, Button, Link } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { NavLink } from 'react-router-dom';
 import { Layout } from '../layout/layout';
 import { EntitlementRestricted } from '../entitlement-restricted/entitlement-restricted';
 import { getActiveCoaches } from '../../services/coaches/coaches';
@@ -18,7 +19,11 @@ const STUDENTCOLUMNS = [
     label: 'First Name',
     align: 'left',
     active: false,
-    render: (value) => <Button>{value}</Button>,
+    render: (value, row) => (
+      <NavLink to="/student-info" state={{ studentId: row.id }}>
+        {value}
+      </NavLink>
+    ),
   },
   {
     id: 'lastName',

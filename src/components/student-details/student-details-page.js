@@ -8,11 +8,14 @@ import { GenericModal } from '../shared/generic-modal';
 import InfoBox from './info-box';
 import { TextFieldWithErrorMessage } from '../coaches/text-field-with-error-message';
 import { CommunicationLog } from './communication-log';
-import { StudentInfoBox } from './student-info-box';
+import { GoalsBox, StudentInfoBox } from './student-info-box';
 import DynamicTabs from '../table-layout/dynamicTabs';
 import AddGoalModal from './addGoalMoal';
 import AddCommunicationsModal from './addCommunicationModal';
+import Goal from './goal';
 
+// StudentDetails is meant to be a 'skeleton' that controls page layout
+// Nothing in here should be hard-coded, should be passed via props
 export default function StudentDetails(props) {
   const { student, goals, careers, interviews, communications, onReload } =
     props;
@@ -111,16 +114,7 @@ export default function StudentDetails(props) {
           <Box sx={boxStyle} padding="4vh">
             {tabValue === 0 && (
               <Grid>
-                <h1>Student Info</h1>
-                <StudentInfoBox
-                  student={student}
-                  onReload={() => onReload()}
-                  isParent={false}
-                />
-                <br />
-                <br />
-                <br />
-                <h1>Parent Info</h1>
+                <StudentInfoBox student={student} onReload={() => onReload()} />
                 <StudentInfoBox
                   student={student}
                   onReload={() => onReload()}
@@ -130,51 +124,31 @@ export default function StudentDetails(props) {
             )}
 
             {tabValue === 1 && (
-              <React.Fragment>
-                <h1>Goals</h1>
-                <Grid>
-                  <AddGoalModal student={student} />
-                  {goals === null && <h6>No Goals</h6>}
-                  {goals !== null &&
-                    goals !== undefined &&
-                    goals.map((goal) => {
-                      return <h6 key={goal.id}>Goal: {goal.goalSet}</h6>;
-                    })}
-                </Grid>
-                <h1>Careers</h1>
-                <Grid>
-                  {careers === null ||
-                    (careers === undefined && <h6>No Careers</h6>)}
-                  {careers !== null &&
-                    [careers].map((career) => {
-                      return (
-                        <h6 key={career.careerDeclaration}>
-                          Career: {career.studentCareerPath}
-                        </h6>
-                      );
-                    })}
-                </Grid>
-              </React.Fragment>
+              <GoalsBox student={student} onReload={() => onReload()} />
             )}
 
             {tabValue === 2 && (
-              <React.Fragment>
-                <h1>Interviews</h1>
-                <Grid>
-                  {(interviews === null ||
-                    interviews === undefined ||
-                    interviews === {}) && <h6>No Interviews</h6>}
-                  {interviews !== null &&
-                    interviews !== undefined &&
-                    [interviews].map((interview) => {
-                      return (
-                        <h6 key={interview.id}>
-                          Interview: {interview.goalSet}
-                        </h6>
-                      );
-                    })}
-                </Grid>
-              </React.Fragment>
+              <Box> Placeholder </Box>
+              // TO BE DEPRECATED
+              // Should be part of its own component
+
+              // <React.Fragment>
+              //   <h1>Interviews</h1>
+              //   <Grid>
+              //     {(interviews === null ||
+              //       interviews === undefined ||
+              //       interviews === {}) && <h6>No Interviews</h6>}
+              //     {interviews !== null &&
+              //       interviews !== undefined &&
+              //       [interviews].map((interview) => {
+              //         return (
+              //           <h6 key={interview.id}>
+              //             Interview: {interview.goalSet}
+              //           </h6>
+              //         );
+              //       })}
+              //   </Grid>
+              // </React.Fragment>
             )}
           </Box>
         </Grid>

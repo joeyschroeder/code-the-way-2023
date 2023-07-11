@@ -13,6 +13,15 @@ export function getGoalsHandler() {
 export function getStudentGoalsHandler(studentId) {
   getStudentGoals(studentId);
 }
+export function altGetStudentGoalsHandler(studentId, callback) {
+  getStudentGoals(studentId)
+    .then((goals) => {
+      callback(goals, null); // Invoke the callback with goals and no error
+    })
+    .catch((error) => {
+      callback(null, error); // Invoke the callback with null goals and the error
+    });
+}
 
 export function addGoalHandler(
   id,

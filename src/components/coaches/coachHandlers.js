@@ -62,7 +62,7 @@ export function addCoachHandler(
  * @param {string} coachPhoneNumber
  * @param {boolean} active  TODO Likely to change to string
  */
-export function editCoachHandler(
+export async function editCoachHandler(
   id,
   userId,
   coachFirstName,
@@ -80,7 +80,7 @@ export function editCoachHandler(
     coachPhoneNumber,
     active,
   };
-  editCoach(coach);
+  await editCoach(coach);
 }
 
 /**
