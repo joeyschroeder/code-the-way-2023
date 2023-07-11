@@ -151,7 +151,7 @@ export default function StudentDetails(props) {
       </Grid>
       <Grid container xs={1}>
         <Grid item alignItems="flex-end" sx={{ pl: '510%' }}>
-          <AddCommunicationsModal />
+          <AddCommunicationsModal student={student}/>
         </Grid>
 
         <Grid item sx={{ ml: '10%' }}>

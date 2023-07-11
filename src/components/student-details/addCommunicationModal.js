@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { GenericModal } from '../shared/generic-modal';
 import { TextFieldWithErrorMessage } from '../coaches/text-field-with-error-message';
-import { addCommunications } from '../../services/communications/communications';
+import {addCommunicationHandler} from './CommunicationsHandler';
 
 export default function AddCommunicationsModal(props) {
   // "communicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -36,7 +36,7 @@ export default function AddCommunicationsModal(props) {
       created,
     };
 
-    await addCommunications(addCommunication);
+    await addCommunicationHandler(addCommunication);
 
     if (onSaveSuccess) onSaveSuccess();
   };

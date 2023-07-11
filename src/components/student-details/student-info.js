@@ -5,7 +5,7 @@ import { getStudentById } from '../../services/students/students';
 import { CircularProgressOverlay } from '../circular-progress-overlay/circular-progress-overlay';
 import { getStudentInterviews } from '../../services/interviews/interviews';
 import { LayoutError } from '../layout/layout-error/layout-error';
-import { getCommunicationsByStudentId } from '../../services/communications/communications';
+import { getStudentCommunicationsHandler } from './CommunicationsHandler';
 
 export function StudentInfo() {
   const [student, setStudent] = useState({});
@@ -40,7 +40,7 @@ export function StudentInfo() {
       const { interviewData } = interviewResponse;
       setInterviews(interviewData);
 
-      const communicationResponse = await getCommunicationsByStudentId(id);
+      const communicationResponse = await getStudentCommunicationsHandler(id);
       const { communicationData } = communicationResponse;
       setCommunications(communicationData);
     } catch (error) {
@@ -52,6 +52,8 @@ export function StudentInfo() {
   useEffect(() => {
     requestStudent(studentId);
   }, [studentId]);
+
+  console.log(communications)
 
   // Memoize the student details component to prevent unnecessary re-renders
   const memoizedStudentDetails = useMemo(

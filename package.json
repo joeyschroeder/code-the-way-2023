@@ -71,6 +71,7 @@
     "@mui/x-data-grid": "^6.6.0",
     "@mui/x-date-pickers": "^6.9.2",
     "axios": "^1.4.0",
+    "crypto": "^1.0.1",
     "dayjs": "^1.11.9",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
