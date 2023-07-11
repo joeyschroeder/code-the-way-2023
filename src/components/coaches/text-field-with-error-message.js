@@ -15,7 +15,7 @@ export function TextFieldWithErrorMessage(props) {
         variant="outlined"
         label={label}
         value={value}
-        sx={{ color: 'white' }}
+        sx={{ color: 'white', my: 1 }}
         onChange={(e) => {
           onChange(e.target.value);
         }}

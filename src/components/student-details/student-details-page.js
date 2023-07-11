@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { Box, Tab } from '@mui/material';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { CommunicationLog } from './communication-log';
+import { CommuinicationSearchBar } from './communication-search';
 import { GoalsBox, StudentInfoBox } from './student-info-box';
 import AddCommunicationsModal from './addCommunicationModal';
 // import DynamicTabs from '../table-layout/dynamicTabs';
@@ -150,6 +151,9 @@ export default function StudentDetails(props) {
         </Grid>
       </Grid>
       <Grid container xs={1}>
+        <Grid item alignItems="flex-front" sx={{ pl: '510%' }}>
+          <CommuinicationSearchBar student={student.id} />
+        </Grid>
         <Grid item alignItems="flex-end" sx={{ pl: '510%' }}>
           <AddCommunicationsModal student={student}/>
         </Grid>
