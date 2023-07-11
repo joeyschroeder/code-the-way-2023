@@ -3,16 +3,12 @@ import Grid from '@mui/material/Grid';
 import propTypes from 'prop-types';
 import { Box, Tab } from '@mui/material';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
-import AddIcon from '@mui/icons-material/Add';
-import { GenericModal } from '../shared/generic-modal';
-import InfoBox from './info-box';
-import { TextFieldWithErrorMessage } from '../coaches/text-field-with-error-message';
 import { CommunicationLog } from './communication-log';
 import { GoalsBox, StudentInfoBox } from './student-info-box';
-import DynamicTabs from '../table-layout/dynamicTabs';
-import AddGoalModal from './addGoalMoal';
 import AddCommunicationsModal from './addCommunicationModal';
-import Goal from './goal';
+// import DynamicTabs from '../table-layout/dynamicTabs';
+// import Goal from './goal';
+// import AddGoalModal from './addGoalMoal';
 
 // StudentDetails is meant to be a 'skeleton' that controls page layout
 // Nothing in here should be hard-coded, should be passed via props
