@@ -62,12 +62,6 @@ export default function CommunicationBox(props) {
         <Grid item xs={4}>
           <Typography sx={textStyle}>Coach: {coach} </Typography>
         </Grid>
-        <Grid item xs={0} sx={iconStyle}>
-          <GenericModal
-            openButtonIcon={<Delete sx={iconStyle} />}
-            modalHeadingTitle="Delete Comunication?"
-          />
-        </Grid>
         <Grid item xs={9}>
           <Typography sx={headerStyle}>{topic}</Typography>
         </Grid>

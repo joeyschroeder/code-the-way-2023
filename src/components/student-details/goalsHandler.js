@@ -46,7 +46,7 @@ export function addGoalHandler(
   addGoal(data);
 }
 
-export function editGoalHandler(
+export async function editGoalHandler(
   id,
   studentId,
   goalSet,
@@ -66,7 +66,7 @@ export function editGoalHandler(
     wasItAccomplished,
     explanation,
   };
-  editGoal(data);
+  await editGoal(data);
 }
 
 export function deleteGoalHandler(id) {

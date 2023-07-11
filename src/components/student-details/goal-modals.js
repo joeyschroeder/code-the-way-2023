@@ -31,19 +31,22 @@ export function EditGoalModal(props) {
   }, [goal]);
 
   const requestSave = async () => {
-    await editGoalHandler(
-      goal.id,
-      goal.studentId,
-      goalSet,
-      dateGoalSet,
-      sel,
-      goalReviewDate,
-      wasItAccomplished,
-      explanation
-    );
     console.log('save requested');
-
-    if (onSaveSuccess) onSaveSuccess();
+    try {
+      await editGoalHandler(
+        goal.id,
+        goal.studentId,
+        goalSet,
+        dateGoalSet,
+        sel,
+        goalReviewDate,
+        wasItAccomplished,
+        explanation
+      );
+      if (onSaveSuccess) onSaveSuccess();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <GenericModal

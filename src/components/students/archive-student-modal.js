@@ -22,14 +22,13 @@ export function ArchiveStudentModal(props) {
   return (
     <GenericModal
       openModal={<DeleteIcon />}
-      modalHeadingTitle="Archive Student"
-      modalMessage="Are you sure you want to archive this student?"
+      modalHeadingTitle="Deactivate Student"
+      modalMessage="Are you sure you want to deactivate this student?"
       actionButtonColor="archive"
       cancelButtonColor="cancel"
-      actionButtonTitle="Archive"
+      actionButtonTitle="Deactivate"
       cancelButtonTitle="Cancel"
       onActionButtonClick={deactivateStudentAction}
     />
   );
 }
-

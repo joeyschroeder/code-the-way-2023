@@ -26,7 +26,7 @@ export function Login() {
   const submitDisabled = !username || !password;
   const showErrorMessage = Boolean(errorMessage);
 
-  const onSuccessCallback = () => navigate('/');
+  const onSuccessCallback = () => navigate('/students');
   const onFailureCallback = (error) => {
     const message =
       error?.response?.data?.message || error?.message || 'An error occurred.';
