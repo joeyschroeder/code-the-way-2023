@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { GenericModal } from '../shared/generic-modal';
 import { TextFieldWithErrorMessage } from '../coaches/text-field-with-error-message';
-import {addCommunicationHandler} from './CommunicationsHandler';
+import { addCommunicationHandler } from './CommunicationsHandler';
 
 export default function AddCommunicationsModal(props) {
   // "communicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -17,26 +17,22 @@ export default function AddCommunicationsModal(props) {
   const [topic, setTopic] = useState('');
   const [description, setDescription] = useState('');
 
-  const communicationId = String(Math.random());
   const studentId = student.id;
   const coachID = student.coachId;
   const created = new Date().toJSON();
 
-  console.log('Communication id', communicationId);
   console.log('student Id', studentId);
   console.log('coach Id', coachID);
+  console.log('created', created);
 
   const requestSave = async () => {
-    const addCommunication = {
-      communicationId,
+    await addCommunicationHandler(
       studentId,
       coachID,
       topic,
       description,
-      created,
-    };
-
-    await addCommunicationHandler(addCommunication);
+      created
+    );
 
     if (onSaveSuccess) onSaveSuccess();
   };
