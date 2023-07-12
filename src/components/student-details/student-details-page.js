@@ -24,18 +24,24 @@ export default function StudentDetails(props) {
     setTabValue(newValue);
   }, []);
 
-  const [commsLog, setCommsLog] = React.useState([]);
+  const [commsLog, setCommsLog] = React.useState({});
+  const [commsLogdescription, setCommsLogdescription] = React.useState({});
+  const [description, setDescription] = React.useState('');
   const requestCommsLog = async (id) => {
     const response = await getStudentCommunicationsHandler(id);
     const { data } = response;
     setCommsLog(data);
+    setCommsLogdescription(data.description);
   };
 
   useEffect(() => {
+    setDescription(
+      communications.description ? communications.description : ''
+    );
     requestCommsLog(studentID);
   }, [studentID]);
 
-  console.log('communication log', commsLog);
+  console.log('communication logingdiscritpon---------------', { description });
 
   const boxStyle = React.useMemo(
     () => ({
