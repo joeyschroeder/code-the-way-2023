@@ -20,6 +20,9 @@ export default function StudentDetails(props) {
   const [tabValue, setTabValue] = React.useState(0);
   const studentID = student.id;
 
+  let communicationList = [];
+  let communicationData = [];
+
   const handleChange = React.useCallback((event, newValue) => {
     setTabValue(newValue);
   }, []);
@@ -35,10 +38,27 @@ export default function StudentDetails(props) {
     requestCommsLog(studentID);
   }, [studentID]);
 
-  console.log(
-    'communication logingdiscritpon---------------',
-    commsLog[0].description
-  );
+  console.log('communication loging description---------------', commsLog);
+
+  communicationList = [];
+  Object.entries(commsLog).forEach((comm) => {
+    communicationData = [];
+
+    communicationData.push(
+      `${student.coach.coachFirstName} ${student.coach.coachLastName}`
+    ); // 0
+    communicationData.push(comm[1].communicationId); // 1
+
+    const date = new Date(comm[1].created);
+    communicationData.push(date.toLocaleDateString('en-US')); // 2
+
+    communicationData.push(comm[1].description); // 3
+    communicationData.push(comm[1].studentId); // 4
+    communicationData.push(comm[1].topic); // 5
+    communicationList.push(communicationData);
+  });
+
+  console.log('communicationList', communicationList);
 
   const boxStyle = React.useMemo(
     () => ({
@@ -178,7 +198,7 @@ export default function StudentDetails(props) {
 
         <Grid item sx={{ ml: '10%' }}>
           {console.log(communications)}
-          <CommunicationLog data={commsLog} />
+          <CommunicationLog data={communicationList} />
         </Grid>
       </Grid>
     </Grid>

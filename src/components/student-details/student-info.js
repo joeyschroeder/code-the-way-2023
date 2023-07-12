@@ -40,9 +40,9 @@ export function StudentInfo() {
       const { interviewData } = interviewResponse;
       setInterviews(interviewData);
 
-      // const communicationResponse = await getStudentCommunicationsHandler(id);
-      // const { communicationData } = communicationResponse;
-      // setCommunications(communicationData);
+      const communicationResponse = await getStudentCommunicationsHandler(id);
+      const { communicationData } = communicationResponse;
+      setCommunications(communicationData);
     } catch (error) {
       setHasError(true);
     }
@@ -52,8 +52,6 @@ export function StudentInfo() {
   useEffect(() => {
     requestStudent(studentId);
   }, [studentId]);
-
-  console.log(communications);
 
   // Memoize the student details component to prevent unnecessary re-renders
   const memoizedStudentDetails = useMemo(
