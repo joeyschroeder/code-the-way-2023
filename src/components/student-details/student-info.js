@@ -27,6 +27,7 @@ export function StudentInfo() {
       const { data } = response;
       setStudent(data.student);
       setGoals(data.student.goals);
+      console.log('studfent responce', data);
 
       const careerData = {
         studentCareerPath: data.student.studentCareerPath,

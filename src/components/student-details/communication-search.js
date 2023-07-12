@@ -45,6 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 export function CommuinicationSearchBar(props) {
   const { student } = props;
+  const studentID = student.id;
   // Stage 1
   const filterBy = [
     'communicationId',
@@ -56,35 +57,23 @@ export function CommuinicationSearchBar(props) {
   ];
   // requestFunc={getStudentCommunications()} get the id of the current student
   // Stage 2 - use row
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [rows, setRows] = useState([]);
-
-  const request = async () => {
-    setIsLoading(true);
-    setHasError(false);
-
-    try {
-      const response = await getStudentCommunicationsHandler(student);
-      const { data } = response;
-      setRows(data);
-    } catch (error) {
-      setRows([]);
-      setHasError(true);
-    }
-
-    setIsLoading(false);
+  const [commsLog, setCommsLog] = React.useState([]);
+  const requestCommsLog = async (id) => {
+    const response = await getStudentCommunicationsHandler(id);
+    const { data } = response;
+    setCommsLog(data);
   };
 
   useEffect(() => {
-    request();
-  }, []);
+    requestCommsLog(studentID);
+  }, [studentID]);
 
   // if (isLoading) {
   //     return (<LayoutPreloader />)
   // } else if{(hasError) return( <LayoutError />)}
   // Stage 3
-  const [logRows, setLogRows] = useState(rows);
+  const [logRows, setLogRows] = useState(commsLog);
+  console.log('discritption of communicationss', logRows.description);
 
   /**
    * The function `requestSearch` filters an array of log rows based on a searched value and updates
