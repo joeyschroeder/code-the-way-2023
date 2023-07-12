@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import propTypes from 'prop-types';
 import { Box, Tab } from '@mui/material';
@@ -7,6 +7,7 @@ import { CommunicationLog } from './communication-log';
 import { CommuinicationSearchBar } from './communication-search';
 import { GoalsBox, StudentInfoBox } from './student-info-box';
 import AddCommunicationsModal from './addCommunicationModal';
+import { getStudentCommunicationsHandler } from '../communications/communicationsHandler';
 // import DynamicTabs from '../table-layout/dynamicTabs';
 // import Goal from './goal';
 // import AddGoalModal from './addGoalMoal';
@@ -17,10 +18,24 @@ export default function StudentDetails(props) {
   const { student, goals, careers, interviews, communications, onReload } =
     props;
   const [tabValue, setTabValue] = React.useState(0);
+  const studentID = student.id;
 
   const handleChange = React.useCallback((event, newValue) => {
     setTabValue(newValue);
   }, []);
+
+  const [commsLog, setCommsLog] = React.useState([]);
+  const requestCommsLog = async (id) => {
+    const response = await getStudentCommunicationsHandler(id);
+    const { data } = response;
+    setCommsLog(data);
+  };
+
+  useEffect(() => {
+    requestCommsLog(studentID);
+  }, [studentID]);
+
+  console.log('communication log', commsLog);
 
   const boxStyle = React.useMemo(
     () => ({
