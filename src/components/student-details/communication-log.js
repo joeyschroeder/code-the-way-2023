@@ -14,10 +14,10 @@ export function CommunicationLog(props) {
       <div style={style}>
         <CommunicationBox
           key={dat[0]}
-          date={dat[1]}
-          coach={dat[2]}
-          topic={dat[3]}
-          notes={dat[4]}
+          date={dat[0]}
+          coach={dat[0]}
+          topic={dat[0]}
+          notes={dat[0]}
         />
       </div>
     );
