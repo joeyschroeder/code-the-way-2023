@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { TextField } from '@mui/material';
 import { GenericModal } from '../shared/generic-modal';
 import { TextFieldWithErrorMessage } from '../coaches/text-field-with-error-message';
-import { addCommunicationHandler } from './CommunicationsHandler';
+import { addCommunicationHandler } from '../communications/communicationsHandler';
 
 export default function AddCommunicationsModal(props) {
   // "communicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -34,7 +35,7 @@ export default function AddCommunicationsModal(props) {
       created
     );
 
-    if (onSaveSuccess) onSaveSuccess();
+    // if (onSaveSuccess) onSaveSuccess();
   };
 
   return (
@@ -45,14 +46,16 @@ export default function AddCommunicationsModal(props) {
       onActionButtonClick={requestSave}
       openModal="Add Communication"
     >
-      <TextFieldWithErrorMessage
+      <TextField
         label="Topic"
-        onChange={(value) => setTopic(value)}
+        onChange={(event) => {
+          setTopic(event.target.value);
+        }}
         value={topic}
       />
-      <TextFieldWithErrorMessage
+      <TextField
         label="Description"
-        onChange={(value) => setDescription(value)}
+        onChange={(event) => setDescription(event.target.value)}
         value={description}
       />
     </GenericModal>

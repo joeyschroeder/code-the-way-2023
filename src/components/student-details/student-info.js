@@ -5,7 +5,7 @@ import { getStudentById } from '../../services/students/students';
 import { CircularProgressOverlay } from '../circular-progress-overlay/circular-progress-overlay';
 import { getStudentInterviews } from '../../services/interviews/interviews';
 import { LayoutError } from '../layout/layout-error/layout-error';
-import { getStudentCommunicationsHandler } from './CommunicationsHandler';
+import { getStudentCommunicationsHandler } from '../communications/communicationsHandler';
 
 export function StudentInfo() {
   const [student, setStudent] = useState({});

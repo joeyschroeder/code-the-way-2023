@@ -155,7 +155,7 @@ export default function StudentDetails(props) {
           <CommuinicationSearchBar student={student.id} />
         </Grid>
         <Grid item alignItems="flex-end" sx={{ pl: '510%' }}>
-          <AddCommunicationsModal student={student}/>
+          <AddCommunicationsModal student={student} />
         </Grid>
 
         <Grid item sx={{ ml: '10%' }}>
