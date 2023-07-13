@@ -6,6 +6,9 @@ import { CircularProgressOverlay } from '../circular-progress-overlay/circular-p
 import { getStudentInterviews } from '../../services/interviews/interviews';
 import { LayoutError } from '../layout/layout-error/layout-error';
 import { getStudentCommunicationsHandler } from '../communications/communicationsHandler';
+import { getStudentGoalsHandler } from './goalsHandler';
+import { getStudentGoals } from '../../services/goals/goals';
+import { getStudentCareersHandler } from './careersHandler';
 
 export function StudentInfo() {
   const [student, setStudent] = useState({});
@@ -21,28 +24,33 @@ export function StudentInfo() {
 
   const requestStudent = async (id) => {
     try {
+      console.log('testing!');
       setHasError(false);
       setIsLoading(true);
       const response = await getStudentById(id);
       const { data } = response;
       setStudent(data.student);
-      setGoals(data.student.goals);
-
-      const careerData = {
-        studentCareerPath: data.student.studentCareerPath,
-        studentCareerInterest: data.student.studentCareerInterest,
-        careerPathList: data.student.careerPathList,
-        careerDeclaration: data.student.careerDeclaration,
-      };
-      setCareers(careerData);
-
+      const goalsResponse = await getStudentGoalsHandler(id);
+      setGoals(goalsResponse);
+      console.log(goalsResponse);
+      // const careerData = {
+      //   studentCareerPath: data.student.studentCareerPath,
+      //   studentCareerInterest: data.student.studentCareerInterest,
+      //   careerPathList: data.student.careerPathList,
+      //   careerDeclaration: data.student.careerDeclaration,
+      // };
+      const careersResponse = await getStudentCareersHandler(id);
+      setCareers(careersResponse);
+      console.log(getStudentCareersHandler(id));
       const interviewResponse = await getStudentInterviews(id);
       const { interviewData } = interviewResponse;
       setInterviews(interviewData);
-
-      const communicationResponse = await getStudentCommunicationsHandler(id);
+      const communicationResponse = await getStudentCommunicationsHandler(
+        data.student.id
+      );
       const { communicationData } = communicationResponse;
       setCommunications(communicationData);
+      console.log(communicationData);
     } catch (error) {
       setHasError(true);
     }
@@ -65,7 +73,7 @@ export function StudentInfo() {
         onReload={() => requestStudent(studentId)}
       />
     ),
-    [student]
+    [student, goals, careers, interviews, communications, studentId]
   );
 
   if (isLoading) return <CircularProgressOverlay />;

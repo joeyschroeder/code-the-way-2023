@@ -10,6 +10,7 @@ export function getCoachCommunicationsHandler(coachId) {
 }
 
 export function getStudentCommunicationsHandler(studentId) {
+  console.log('tesithbgjewnhbjfrt4hebjcuhdbgruegherohgi', studentId);
   return getStudentCommunications(studentId);
 }
 
