@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import { Box, Tab } from '@mui/material';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { CommunicationLog } from './communication-log';
-import { CommuinicationSearchBar } from './communication-search';
+import { SearchBar } from '../table-layout/search';
 import { GoalsBox, StudentInfoBox } from './student-info-box';
 import AddCommunicationsModal from './addCommunicationModal';
 import { getStudentCommunicationsHandler } from '../communications/communicationsHandler';
@@ -59,6 +59,23 @@ export default function StudentDetails(props) {
   });
 
   console.log('communicationList', communicationList);
+
+  const requestSearch = (searchedVal) => {
+    const lowerFilterInput = String(searchedVal).toLowerCase();
+    let newCommunicationData = [];
+    communicationList.indexOf(
+      communicationList.find((arr) => arr.includes(lowerFilterInput))
+    );
+
+    const filteredRows = logRows.filter((row) => {
+      return filterBy.some((key) => {
+        const value = row[key];
+        const lowerValue = String(value).toLowerCase();
+        return lowerValue.includes(lowerFilterInput);
+      });
+    });
+    setLogRows(filteredRows);
+  };
 
   const boxStyle = React.useMemo(
     () => ({
@@ -190,7 +207,7 @@ export default function StudentDetails(props) {
       </Grid>
       <Grid container xs={1}>
         <Grid item alignItems="flex-front" sx={{ pl: '510%' }}>
-          <CommuinicationSearchBar student={student.id} />
+          <SearchBar requestSearch={requestSearch} />
         </Grid>
         <Grid item alignItems="flex-end" sx={{ pl: '510%' }}>
           <AddCommunicationsModal student={student} />
