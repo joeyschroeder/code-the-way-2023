@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { MenuItem, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { assignStudentHandler } from './studentHandlers';
-import GenericModal from '../shared/generic-modal';
+import { GenericModal } from '../shared/generic-modal';
 import { getActiveCoachesHandler } from '../coaches/coachHandlers';
 
 export function ChooseCoachModal(props) {
@@ -63,3 +64,15 @@ export function ChooseCoachModal(props) {
     />
   );
 }
+
+ChooseCoachModal.propTypes = {
+  studentId: PropTypes.func,
+  refreshTable: PropTypes.func,
+  coaches: PropTypes.func,
+};
+
+ChooseCoachModal.defaultProps = {
+  studentId: PropTypes.func,
+  refreshTable: PropTypes.func,
+  coaches: PropTypes.func,
+};

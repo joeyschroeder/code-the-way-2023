@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '@mui/material';
+import { MenuItem, TextField } from '@mui/material';
 import { GenericModal } from '../shared/generic-modal';
 import { TextFieldWithErrorMessage } from '../coaches/text-field-with-error-message';
 import { addCommunicationHandler } from '../communications/communicationsHandler';
+import { ChooseCoachModal } from '../students/choose-coach-modal';
+import { getActiveCoachesHandler } from '../coaches/coachHandlers';
 
 export default function AddCommunicationsModal(props) {
   // "communicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -13,29 +15,39 @@ export default function AddCommunicationsModal(props) {
   //   "description": "string",
   //   "created": "2023-07-10T18:57:02.295Z"
 
-  const { student, onSaveSuccess } = props;
+  const { student } = props;
 
   const [topic, setTopic] = useState('');
   const [description, setDescription] = useState('');
+  const [coachId, setCoachId] = useState('');
+  const [activeCoaches, setActiveCoaches] = React.useState([]);
+
+  const requestActiveCoaches = async () => {
+    const response = await getActiveCoachesHandler();
+    const { data } = response;
+    setActiveCoaches(data);
+  };
+
+  useEffect(() => {
+    requestActiveCoaches();
+  }, []);
 
   const studentId = student.id;
-  const coachID = student.coachId;
   const created = new Date().toJSON();
 
   console.log('student Id', studentId);
-  console.log('coach Id', coachID);
+  console.log('Topic', topic);
+  console.log('coach Id', coachId);
   console.log('created', created);
 
   const requestSave = async () => {
     await addCommunicationHandler(
       studentId,
-      coachID,
+      coachId,
       topic,
       description,
       created
     );
-
-    // if (onSaveSuccess) onSaveSuccess();
   };
 
   return (
@@ -48,16 +60,44 @@ export default function AddCommunicationsModal(props) {
     >
       <TextField
         label="Topic"
+        select
+        value={topic}
         onChange={(event) => {
           setTopic(event.target.value);
         }}
-        value={topic}
-      />
+      >
+        <MenuItem value="one-on-one coaching session">
+          One-on-One Coaching Session
+        </MenuItem>
+        <MenuItem value="email">Email</MenuItem>
+        <MenuItem value="phone call">Phone Call</MenuItem>
+        <MenuItem value="text message">Text Message</MenuItem>
+      </TextField>
+
       <TextField
         label="Description"
         onChange={(event) => setDescription(event.target.value)}
         value={description}
       />
+
+      <TextField
+        label="Coach"
+        select
+        value={coachId}
+        onChange={(event) => setCoachId(event.target.value)}
+        disabled={activeCoaches.length === 0}
+        style={{ width: '200px' }}
+      >
+        {activeCoaches && activeCoaches.length > 0 ? (
+          activeCoaches.map((activeCoach) => (
+            <MenuItem key={activeCoach.id} value={activeCoach.id}>
+              {activeCoach.coachFirstName}
+            </MenuItem>
+          ))
+        ) : (
+          <MenuItem disabled>No coaches available</MenuItem>
+        )}
+      </TextField>
     </GenericModal>
   );
 }

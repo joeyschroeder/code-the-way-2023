@@ -44,11 +44,13 @@ export default function StudentDetails(props) {
   Object.entries(commsLog).forEach((comm) => {
     communicationData = [];
 
-    communicationData.push(
-      `${student.coach.coachFirstName} ${student.coach.coachLastName}`
-    ); // 0
-    communicationData.push(comm[1].communicationId); // 1
+    if (student.coach != null) {
+      communicationData.push(
+        `${student.coach.coachFirstName} ${student.coach.coachLastName}`
+      ); // 0
+    }
 
+    communicationData.push(comm[1].communicationId); // 1
     const date = new Date(comm[1].created);
     communicationData.push(date.toLocaleDateString('en-US')); // 2
 
