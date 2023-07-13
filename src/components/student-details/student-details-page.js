@@ -28,17 +28,17 @@ export default function StudentDetails(props) {
   }, []);
 
   const [commsLog, setCommsLog] = React.useState({});
-  const requestCommsLog = async (id) => {
-    const response = await getStudentCommunicationsHandler(id);
+  const requestCommsLog = async () => {
+    const response = await getStudentCommunicationsHandler(studentID);
     const { data } = response;
     setCommsLog(data);
   };
 
   useEffect(() => {
-    requestCommsLog(studentID);
+    requestCommsLog();
   }, [studentID]);
 
-  console.log('communication loging description---------------', commsLog);
+  console.log('communication loging description---------------', commsLog[0]);
 
   communicationList = [];
   Object.entries(commsLog).forEach((comm) => {
@@ -64,7 +64,7 @@ export default function StudentDetails(props) {
 
   const requestSearch = (searchedVal) => {
     const lowerFilterInput = String(searchedVal).toLowerCase();
-    let newCommunicationData = [];
+    const newCommunicationData = [];
     communicationList.indexOf(
       communicationList.find((arr) => arr.includes(lowerFilterInput))
     );
@@ -217,6 +217,7 @@ export default function StudentDetails(props) {
 
         <Grid item sx={{ ml: '10%' }}>
           {console.log(communications)}
+          {/* <CommunicationLog data={commsLog} /> */} this is for 1d array
           <CommunicationLog data={communicationList} />
         </Grid>
       </Grid>

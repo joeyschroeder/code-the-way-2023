@@ -36,11 +36,13 @@ export function StudentInfo() {
       };
       setCareers(careerData);
 
-      const interviewResponse = await getStudentInterviews(id);
-      const { interviewData } = interviewResponse;
-      setInterviews(interviewData);
+      // const interviewResponse = await getStudentInterviews(id);
+      // const { interviewData } = interviewResponse;
+      // setInterviews(interviewData);
 
-      const communicationResponse = await getStudentCommunicationsHandler(id);
+      const communicationResponse = await getStudentCommunicationsHandler(
+        data.student.id
+      );
       const { communicationData } = communicationResponse;
       setCommunications(communicationData);
     } catch (error) {

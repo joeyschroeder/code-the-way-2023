@@ -10,6 +10,7 @@ export function CommunicationLog(props) {
   const renderCommunicationBox = ({ index, style }) => {
     const dat = data[index];
 
+    // try not using ths 2d array
     return (
       <div style={style}>
         <CommunicationBox
@@ -22,6 +23,23 @@ export function CommunicationLog(props) {
       </div>
     );
   };
+
+  //  using 1d array here, i hope
+//   return (
+//     <React.Fragment>
+//       {data.map((datas) => (
+//         <div key={datas.id} style={style}>
+//           <CommunicationBox
+//             coach={datas.coachId}
+//             date={datas.created}
+//             notes={datas.description}
+//             topic={datas.topic}
+//           />
+//         </div>
+//       ))}
+//     </React.Fragment>
+//   );
+// };
 
   return (
     <Grid
