@@ -63,7 +63,7 @@ export default function AddCommunicationsModal(props) {
 }
 
 AddCommunicationsModal.propTypes = {
-  student: PropTypes.func,
+  student: PropTypes.object,
   onSaveSuccess: PropTypes.func,
 };
 

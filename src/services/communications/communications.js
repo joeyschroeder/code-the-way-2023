@@ -1,21 +1,21 @@
 import { callApi } from '../../utils/call-api/call-api';
 
-export const getCoachCommunications = (coachId) =>
+export const getCoachCommunications = async (coachId) =>
   callApi({ url: `/Communications/GetCoachCommunications/${coachId}` });
 
-export const getStudentCommunications = (studentId) =>
+export const getStudentCommunications = async (studentId) =>
   callApi({ url: `/Communications/GetStudentCommunications/${studentId}` });
 
 /**
  * @param {{communicationId:UUID, studentId:UUID, coachId:UUID, topic:string,description:string,created:Date}} communication
  */
-export const addCommunication = (communication) =>
+export const addCommunication = async (communication) =>
   callApi({ url: '/Communications', data: communication, method: 'POST' });
 
 /**
  * @param {{communicationId:UUID, studentId:UUID, coachId:UUID, topic:string,description:string,created:Date}} communication
  */
-export const editCommunication = (communication) =>
+export const editCommunication = async (communication) =>
   callApi({ url: '/Communications', data: communication, method: 'PUT' });
 
 /**
@@ -23,7 +23,7 @@ export const editCommunication = (communication) =>
  * @param {UUID} communicationId
  * @returns
  */
-export const deleteCommunication = (communicationId) =>
+export const deleteCommunication = async (communicationId) =>
   callApi({
     url: '/Communications',
     params: communicationId,

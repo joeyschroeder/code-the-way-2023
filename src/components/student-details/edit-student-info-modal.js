@@ -97,7 +97,7 @@ export default function EditStudentInfoModal(props) {
 }
 
 EditStudentInfoModal.propTypes = {
-  student: PropTypes.func,
+  student: PropTypes.object,
   onSaveSuccess: PropTypes.func,
   isParent: PropTypes.bool,
 };

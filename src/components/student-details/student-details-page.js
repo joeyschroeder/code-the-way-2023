@@ -8,6 +8,7 @@ import { CommuinicationSearchBar } from './communication-search';
 import { GoalsBox, StudentInfoBox } from './student-info-box';
 import AddCommunicationsModal from './addCommunicationModal';
 import { getStudentCommunicationsHandler } from '../communications/communicationsHandler';
+import { getStudentById } from '../../services/students/students';
 // import DynamicTabs from '../table-layout/dynamicTabs';
 // import Goal from './goal';
 // import AddGoalModal from './addGoalMoal';
@@ -19,6 +20,7 @@ export default function StudentDetails(props) {
     props;
   const [tabValue, setTabValue] = React.useState(0);
   const studentID = student.id;
+  console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,', studentID);
 
   let communicationList = [];
   let communicationData = [];
@@ -28,10 +30,16 @@ export default function StudentDetails(props) {
   }, []);
 
   const [commsLog, setCommsLog] = React.useState({});
+
   const requestCommsLog = async (id) => {
     const response = await getStudentCommunicationsHandler(id);
     const { data } = response;
     setCommsLog(data);
+    console.log('student id: -------------------', response);
+    console.log(
+      'REAL ID ..................................',
+      getStudentById('4f3f5508-2946-47c3-6a41-08da762785c9')
+    );
   };
 
   useEffect(() => {

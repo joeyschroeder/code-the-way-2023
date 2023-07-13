@@ -99,7 +99,7 @@ export function GoalsBox(props) {
 }
 
 StudentInfoBox.propTypes = {
-  student: propTypes.func,
+  student: propTypes.object,
   onReload: propTypes.func,
   isParent: propTypes.bool,
 };
