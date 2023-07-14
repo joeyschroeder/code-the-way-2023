@@ -73,7 +73,7 @@ export function GenericModal(props) {
             </IconButton>
           </Grid>
           {modalMessage && (
-            <Typography padding={5} align="center" fontSize={20}>
+            <Typography px={5} py={3} align="center" fontSize={20}>
               {modalMessage}
             </Typography>
           )}
