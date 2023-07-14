@@ -74,7 +74,7 @@ GenericViewModal.defaultProps = {
 
 GenericViewModal.propTypes = {
   openModal: PropTypes.string,
-  openButtonIcon: PropTypes.instanceOf(Icon),
+  openButtonIcon: PropTypes.element,
   modalHeadingTitle: PropTypes.string.isRequired,
   viewModalWidth: PropTypes.number,
   onIconButtonClick: PropTypes.func,

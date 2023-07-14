@@ -49,9 +49,10 @@ EnhancedTableHead.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
+  orderBy: PropTypes.string,
 };
 
 EnhancedTableHead.defaultProps = {
   columns: [],
+  orderBy: null,
 };
